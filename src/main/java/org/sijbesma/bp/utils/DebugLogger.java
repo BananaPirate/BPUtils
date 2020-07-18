@@ -14,28 +14,29 @@ public class DebugLogger {
 		DebugLogger.debugFlag = debugFlag;
 	}
 	
-	public static void debug(String message) {
+	public static void debug(Object message) {
 		if (debugFlag) {
-			logger.log(Level.INFO, message);
+			logger.log(Level.INFO, message.toString());
 		}
 	}
 
-	public static void debug(String message, boolean header) {
-		debug(message, header, '-');
+	public static void debug(Object message, boolean header) {
+		debug(message.toString(), header, '-');
 	}
 	
 	
-	public static void debug(String message, boolean header, char character) {
+	public static void debug(Object message, boolean header, char character) {
+		String msg = message.toString();
 		if (header) {
 			int length = 20;
-			int padLength = (length - message.length() / 2);
+			int padLength = (length - msg.length() / 2);
 			char[] padChar = new char[padLength];
 			Arrays.fill(padChar, character);
 			String padding = new String(padChar);
-			if(message.length() % 2 == 1) {
-				debug(padding + message + padding);
+			if(msg.length() % 2 == 1) {
+				debug(padding + msg + padding);
 			}else {
-				debug(padding + message + padding + character);
+				debug(padding + msg + padding + character);
 			}
 		} else {
 			debug(message);

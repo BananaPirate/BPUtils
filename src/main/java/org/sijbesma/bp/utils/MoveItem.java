@@ -23,7 +23,7 @@ public class MoveItem {
 	public static void itemStacktoSlot(ItemStack item, Inventory inventory, int slot) {
 		inventory.setItem(slot, item.clone());
 	}
-
+/*
 	public static boolean slotToSlot(int sourceSlot, int targetSlot, Inventory inventory) {
 		ItemStack sourceStack = inventory.getItem(sourceSlot);
 		ItemStack targetStack = inventory.getItem(targetSlot);
@@ -58,7 +58,7 @@ public class MoveItem {
 		//items do not match so do nothing
 		return false;
 	}
-
+*/
 	private static void addItemFromCursor(Player player, Inventory inventory, int slot) {
 		ItemStack itemOnCursor = player.getItemOnCursor().clone();
 		ItemStack itemInSlot = inventory.getItem(slot).clone();

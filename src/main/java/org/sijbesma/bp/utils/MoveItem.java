@@ -4,6 +4,7 @@ import java.util.Arrays;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 public class MoveItem {
@@ -25,17 +26,11 @@ public class MoveItem {
         inventory.setItem(slot, item.clone());
     }
 
-    public static boolean slotToSlot(int sourceSlot, int targetSlot, Inventory inventory) {
-        //ttest
-        System.out.println("sourceSlot: " + sourceSlot);
-        System.out.println("targetSlot: " + targetSlot);
-        System.out.println("inventory: " + inventory);
-        System.out.println("test");
-        
-        System.out.println(Arrays.toString(inventory.getContents()));
+    public static boolean slotToSlot(int sourceSlot, int targetSlot, InventoryView inventoryView) {
 
-        ItemStack sourceStack = inventory.getItem(sourceSlot);
-        ItemStack targetStack = inventory.getItem(targetSlot);
+
+        ItemStack sourceStack = inventoryView.getItem(sourceSlot);
+        ItemStack targetStack = inventoryView.getItem(targetSlot);
         System.out.println("sourceStack: " + sourceStack);
         System.out.println("targetStack: " + targetStack);
         if (sourceStack == null) {
@@ -44,8 +39,8 @@ public class MoveItem {
         }
         if (targetStack == null) {
             // target stack is empty
-            inventory.setItem(targetSlot, sourceStack);
-            inventory.setItem(sourceSlot, new ItemStack(Material.AIR));
+            inventoryView.setItem(targetSlot, sourceStack);
+            inventoryView.setItem(sourceSlot, new ItemStack(Material.AIR));
             return true;
         }
 

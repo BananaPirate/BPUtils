@@ -33,11 +33,11 @@ public class MoveItem {
         ItemStack targetStack = inventoryView.getItem(targetSlot);
         System.out.println("sourceStack: " + sourceStack);
         System.out.println("targetStack: " + targetStack);
-        if (sourceStack == null) {
+        if (sourceStack == null || sourceStack.getType().isAir()) {
             //cannot move nothing
             return false;
         }
-        if (targetStack == null) {
+        if (targetStack == null || targetStack.getType().isAir()) {
             // target stack is empty
             inventoryView.setItem(targetSlot, sourceStack);
             inventoryView.setItem(sourceSlot, new ItemStack(Material.AIR));

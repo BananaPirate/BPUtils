@@ -31,16 +31,12 @@ public class MoveItem {
 
         ItemStack sourceStack = inventoryView.getItem(sourceSlot);
         ItemStack targetStack = inventoryView.getItem(targetSlot);
-        System.out.println("sourceStack: " + sourceStack);
-        System.out.println("targetStack: " + targetStack);
         if (sourceStack == null || sourceStack.getType().isAir()) {
             //cannot move nothing
-            System.out.println("nothing to move");
             return false;
         }
         if (targetStack == null || targetStack.getType().isAir()) {
             // target stack is empty
-            System.out.println("target is empty or air");
             inventoryView.setItem(targetSlot, sourceStack);
             inventoryView.setItem(sourceSlot, new ItemStack(Material.AIR));
             return true;
@@ -64,7 +60,6 @@ public class MoveItem {
 
         }
         //items do not match so do nothing
-        System.out.println("cannot move");
         return false;
     }
 

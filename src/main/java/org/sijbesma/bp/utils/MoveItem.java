@@ -64,6 +64,7 @@ public class MoveItem {
 
         }
         //items do not match so do nothing
+        System.out.println("cannot move");
         return false;
     }
 

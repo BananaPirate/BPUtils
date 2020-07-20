@@ -56,7 +56,7 @@ public class MoveItem {
                 sourceStack.setAmount(0);
                 targetStack.setAmount(targetAmount + sourceAmount);
                 return true;
-            } else {
+            } else if(targetSpace > 0) {
                 sourceStack.setAmount(sourceAmount - targetSpace);
                 targetStack.setAmount(targetMax);
                 return true;

@@ -27,6 +27,8 @@ public class MoveItem {
 	public static boolean slotToSlot(int sourceSlot, int targetSlot, Inventory inventory) {
 		ItemStack sourceStack = inventory.getItem(sourceSlot);
 		ItemStack targetStack = inventory.getItem(targetSlot);
+		System.out.println("sourceStack: "+sourceStack);
+		System.out.println("targetStack: "+targetStack);
 		if (sourceStack == null) {
 			//cannot move nothing
 			return false;

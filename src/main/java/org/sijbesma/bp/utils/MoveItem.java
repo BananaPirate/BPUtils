@@ -1,5 +1,6 @@
 package org.sijbesma.bp.utils;
 
+import java.util.Arrays;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -30,6 +31,8 @@ public class MoveItem {
         System.out.println("targetSlot: " + targetSlot);
         System.out.println("inventory: " + inventory);
         System.out.println("test");
+        
+        System.out.println(Arrays.toString(inventory.getContents()));
 
         ItemStack sourceStack = inventory.getItem(sourceSlot);
         ItemStack targetStack = inventory.getItem(targetSlot);

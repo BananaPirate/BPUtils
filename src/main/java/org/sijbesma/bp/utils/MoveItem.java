@@ -25,6 +25,11 @@ public class MoveItem {
 	}
 
 	public static boolean slotToSlot(int sourceSlot, int targetSlot, Inventory inventory) {
+		System.out.println(sourceSlot);
+		System.out.println(targetSlot);
+		System.out.println(inventory);
+		
+		
 		ItemStack sourceStack = inventory.getItem(sourceSlot);
 		ItemStack targetStack = inventory.getItem(targetSlot);
 		System.out.println("sourceStack: "+sourceStack);

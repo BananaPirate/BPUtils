@@ -9,14 +9,14 @@ import org.bukkit.inventory.ItemStack;
 
 public class MoveItem {
 
-    public static boolean cursorToSlot(Player player, Inventory inventory, int slot) {
+    public static boolean cursorToSlot(Player player, InventoryView inventoryView, int slot) {
         System.out.println("test");
         ItemStack itemOnCursor = player.getItemOnCursor();
         if(itemOnCursor == null){
             return false;
         }
 
-        ItemStack itemInSlot = inventory.getItem(slot);
+        ItemStack itemInSlot = inventoryView.getItem(slot);
         if(itemInSlot == null){
             itemInSlot = new ItemStack(Material.AIR,0);
         }
@@ -24,10 +24,10 @@ public class MoveItem {
 
         if (itemOnCursor.isSimilar(itemInSlot)) {
             // add items from cursor to stack
-            return addItemFromCursor(player, inventory, slot);
+            return addItemFromCursor(player, inventoryView, slot);
         } else {
             // swap item and cursor
-            return swapItemFromCursor(player, inventory, slot);
+            return swapItemFromCursor(player, inventoryView, slot);
         }
     }
 
@@ -72,14 +72,14 @@ public class MoveItem {
         return false;
     }
 
-    private static boolean addItemFromCursor(Player player, Inventory inventory, int slot) {
+    private static boolean addItemFromCursor(Player player, InventoryView inventoryView, int slot) {
         ItemStack itemOnCursor = player.getItemOnCursor();
         if (itemOnCursor == null){
             return false;
         } else {
             itemOnCursor = itemOnCursor.clone();
         }
-        ItemStack itemInSlot = inventory.getItem(slot);
+        ItemStack itemInSlot = inventoryView.getItem(slot);
         if(itemInSlot == null){
             itemInSlot = new ItemStack(Material.AIR,0);
         }else{
@@ -100,25 +100,25 @@ public class MoveItem {
             return false;
         }
         player.setItemOnCursor(itemOnCursor);
-        inventory.setItem(slot, itemInSlot);
+        inventoryView.setItem(slot, itemInSlot);
         return true;
     }
 
-    private static boolean swapItemFromCursor(Player player, Inventory inventory, int slot) {
+    private static boolean swapItemFromCursor(Player player, InventoryView inventoryView, int slot) {
         ItemStack itemOnCursor = player.getItemOnCursor();
         if (itemOnCursor == null){
             return false;
         } else {
             itemOnCursor = itemOnCursor.clone();
         }
-        ItemStack itemInSlot = inventory.getItem(slot);
+        ItemStack itemInSlot = inventoryView.getItem(slot);
         if(itemInSlot == null){
             itemInSlot = new ItemStack(Material.AIR,0);
         }else{
             itemInSlot = itemInSlot.clone();
         }
         player.setItemOnCursor(itemInSlot);
-        inventory.setItem(slot, itemOnCursor);
+        inventoryView.setItem(slot, itemOnCursor);
         return true;
     }
 }

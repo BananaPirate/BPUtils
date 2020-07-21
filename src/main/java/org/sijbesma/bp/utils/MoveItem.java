@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class MoveItem {
 
     public static boolean cursorToSlot(Player player, Inventory inventory, int slot) {
+        System.out.println("test");
         ItemStack itemOnCursor = player.getItemOnCursor();
         if(itemOnCursor == null){
             return false;

@@ -14,13 +14,10 @@ public class MoveItem {
         if(itemOnCursor == null){
             return false;
         }
-        itemOnCursor = itemOnCursor.clone();
 
         ItemStack itemInSlot = inventory.getItem(slot);
         if(itemInSlot == null){
             itemInSlot = new ItemStack(Material.AIR,0);
-        }else{
-            itemInSlot = itemInSlot.clone();
         }
         
 
@@ -75,8 +72,18 @@ public class MoveItem {
     }
 
     private static boolean addItemFromCursor(Player player, Inventory inventory, int slot) {
-        ItemStack itemOnCursor = player.getItemOnCursor().clone();
-        ItemStack itemInSlot = inventory.getItem(slot).clone();
+        ItemStack itemOnCursor = player.getItemOnCursor();
+        if (itemOnCursor == null){
+            return false;
+        } else {
+            itemOnCursor = itemOnCursor.clone();
+        }
+        ItemStack itemInSlot = inventory.getItem(slot);
+        if(itemInSlot == null){
+            itemInSlot = new ItemStack(Material.AIR,0);
+        }else{
+            itemInSlot = itemInSlot.clone();
+        }
         int cursorAmount = itemOnCursor.getAmount();
         int slotAmount = itemInSlot.getAmount();
         int spaceInSlot = itemInSlot.getMaxStackSize() - itemInSlot.getAmount();
@@ -97,8 +104,18 @@ public class MoveItem {
     }
 
     private static boolean swapItemFromCursor(Player player, Inventory inventory, int slot) {
-        ItemStack itemOnCursor = player.getItemOnCursor().clone();
-        ItemStack itemInSlot = inventory.getItem(slot).clone();
+        ItemStack itemOnCursor = player.getItemOnCursor();
+        if (itemOnCursor == null){
+            return false;
+        } else {
+            itemOnCursor = itemOnCursor.clone();
+        }
+        ItemStack itemInSlot = inventory.getItem(slot);
+        if(itemInSlot == null){
+            itemInSlot = new ItemStack(Material.AIR,0);
+        }else{
+            itemInSlot = itemInSlot.clone();
+        }
         player.setItemOnCursor(itemInSlot);
         inventory.setItem(slot, itemOnCursor);
         return true;

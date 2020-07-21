@@ -9,16 +9,27 @@ import org.bukkit.inventory.ItemStack;
 
 public class MoveItem {
 
-    public static void cursorToSlot(Player player, Inventory inventory, int slot) {
-        ItemStack itemOnCursor = player.getItemOnCursor().clone();
-        ItemStack itemInSlot = inventory.getItem(slot).clone();
+    public static boolean cursorToSlot(Player player, Inventory inventory, int slot) {
+        ItemStack itemOnCursor = player.getItemOnCursor();
+        if(itemOnCursor == null){
+            return false;
+        }
+        itemOnCursor = itemOnCursor.clone();
+
+        ItemStack itemInSlot = inventory.getItem(slot);
+        if(itemInSlot == null){
+            itemInSlot = new ItemStack(Material.AIR,0);
+        }else{
+            itemInSlot = itemInSlot.clone();
+        }
+        
 
         if (itemOnCursor.isSimilar(itemInSlot)) {
             // add items from cursor to stack
-            addItemFromCursor(player, inventory, slot);
+            return addItemFromCursor(player, inventory, slot);
         } else {
             // swap item and cursor
-            swapItemFromCursor(player, inventory, slot);
+            return swapItemFromCursor(player, inventory, slot);
         }
     }
 
@@ -38,7 +49,7 @@ public class MoveItem {
         if (targetStack == null || targetStack.getType().isAir()) {
             // target stack is empty
             inventoryView.setItem(targetSlot, sourceStack);
-            inventoryView.setItem(sourceSlot, new ItemStack(Material.AIR));
+            inventoryView.setItem(sourceSlot, new ItemStack(Material.AIR,0));
             return true;
         }
 
@@ -63,7 +74,7 @@ public class MoveItem {
         return false;
     }
 
-    private static void addItemFromCursor(Player player, Inventory inventory, int slot) {
+    private static boolean addItemFromCursor(Player player, Inventory inventory, int slot) {
         ItemStack itemOnCursor = player.getItemOnCursor().clone();
         ItemStack itemInSlot = inventory.getItem(slot).clone();
         int cursorAmount = itemOnCursor.getAmount();
@@ -77,15 +88,19 @@ public class MoveItem {
                 itemInSlot.setAmount(slotAmount + spaceInSlot);
                 itemOnCursor.setAmount(cursorAmount - spaceInSlot);
             }
+        }else{
+            return false;
         }
         player.setItemOnCursor(itemOnCursor);
         inventory.setItem(slot, itemInSlot);
+        return true;
     }
 
-    private static void swapItemFromCursor(Player player, Inventory inventory, int slot) {
+    private static boolean swapItemFromCursor(Player player, Inventory inventory, int slot) {
         ItemStack itemOnCursor = player.getItemOnCursor().clone();
         ItemStack itemInSlot = inventory.getItem(slot).clone();
         player.setItemOnCursor(itemInSlot);
         inventory.setItem(slot, itemOnCursor);
+        return true;
     }
 }
